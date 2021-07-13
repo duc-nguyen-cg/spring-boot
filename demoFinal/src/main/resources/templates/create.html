@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        table {
+            border-collapse: collapse;
+            border: none;
+        }
+        .error {
+            color: red;
+            font-weight: 600;
+        }
+        .add{
+            background-color: greenyellow;
+            border-color: greenyellow;
+        }
+    </style>
+</head>
+<body>
+    <form action="/cities/create" method="post" th:object="${city}">
+    <table cellpadding="10">
+        <h3>Create Form</h3>
+        <p style="color: green; font-weight: 600" th:if="${message}" th:text="${message}"></p>
+        <tr>
+            <th>Name</th>
+            <td><input type="text" th:field="*{name}"></td>
+        </tr>
+        <tr>
+            <th>Country</th>
+            <td>
+                <select th:field="*{country}">
+                    <option th:each="c : ${countries}" th:value="${c.id}" th:text="${c.countryName}"></option>
+                </select>
+            </td>
+        </tr>
+        <tr>
+            <th>Area</th>
+            <td><input type="text" th:field="*{area}"></td>
+            <td class="error" th:if="${#fields.hasErrors('area')}" th:errors="*{area}">Area Error</td>
+        </tr>
+        <tr>
+            <th>Population</th>
+            <td><input type="number" th:field="*{population}"></td>
+            <td class="error" th:if="${#fields.hasErrors('population')}" th:errors="*{population}">Population Error</td>
+        </tr>
+        <tr>
+            <th>GDP</th>
+            <td><input type="text" th:field="*{GDP}"></td>
+            <td class="error" th:if="${#fields.hasErrors('GDP')}" th:errors="*{GDP}">GDP Error</td>
+        </tr>
+        <tr>
+            <th>Description</th>
+            <td><textarea maxlength="255" th:field="*{description}"></textarea></td>
+        </tr>
+        <tr>
+            <td>
+                <a href="/cities/list"><input type="button"  value="Back"></a>
+            </td>
+            <td>
+                <input class="add" type="submit" value="Add">
+            </td>
+        </tr>
+    </table>
+    </form>
+</body>
+</html>

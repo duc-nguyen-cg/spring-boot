@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        input[type=text] {
+            border: none;
+        }
+        input[type=number]{
+            border: none;
+        }
+        table {
+            border-collapse: collapse;
+            border: 1px solid black;
+        }
+    </style>
+</head>
+<body>
+<form action="/cities/delete" method="post" th:object="${city}">
+    <table cellpadding="10" >
+        <input hidden th:field="*{id}"/>
+        <h3>Are you sure?</h3>
+        <tr>
+            <th>Name</th>
+            <td><input type="text" th:field="*{name}"></td>
+        </tr>
+        <tr>
+            <th>Country</th>
+            <td>
+                <input type="text" th:field="*{country.countryName}">
+            </td>
+        </tr>
+        <tr>
+            <th>Area</th>
+            <td><input type="text" th:field="*{area}"></td>
+        </tr>
+        <tr>
+            <th>Population</th>
+            <td><input type="number" th:field="*{population}"></td>
+        </tr>
+        <tr>
+            <th>GDP</th>
+            <td><input type="text" th:field="*{GDP}"></td>
+        </tr>
+        <input hidden type="text" th:field="*{description}">
+        <tr>
+            <td>
+                <a href="/cities/list"><input type="button"  value="Cancel"></a>
+            </td>
+            <td>
+                <input type="submit" value="Delete">
+            </td>
+        </tr>
+    </table>
+</form>
+
+</body>
+</html>

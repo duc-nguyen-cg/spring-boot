@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        table {
+            border-collapse: collapse;
+            border: 1px solid black;
+        }
+        tr:nth-child(even){
+            background-color: lightblue;
+        }
+        .add{
+            background-color: greenyellow;
+            border-color: greenyellow;
+        }
+        .edit{
+            background-color: aqua;
+            border-color: aqua;
+        }
+        .delete{
+            background-color: red;
+            border-color: red;
+        }
+    </style>
+</head>
+<body>
+    <h3>Cities</h3>
+    <p style="color: red; font-weight: 600" th:if="${message}" th:text="${message}"></p>
+
+    <a href="/cities/create"><button class="add" type="button">Add New City</button></a>
+    <br/><br/>
+    <table cellpadding="10">
+        <tr>
+            <th>#</th>
+            <th>Name</th>
+            <th>Country</th>
+            <th>Edit</th>
+            <th>Delete</th>
+        </tr>
+        <tr th:each="city, loopState: ${cities}">
+            <td th:text="${loopState.count}"></td>
+            <td><a th:href="@{/cities/view/__${city.id}__}" th:text="${city.name}"></a></td>
+            <td th:text="${city.country.countryName}"></td>
+            <td><a th:href="@{/cities/edit/__${city.id}__}"><button class="edit" type="button">Edit</button></a></td>
+            <td><a th:href="@{/cities/delete/__${city.id}__}"><button class="delete" type="button">Delete</button></a></td>
+        </tr>
+    </table>
+</body>
+</html>
